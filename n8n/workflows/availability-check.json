@@ -1,0 +1,133 @@
+{
+  "name": "availability-check",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "check-availability",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c821b076-736e-46fd-9f2b-6668660c14c8",
+      "name": "Webhook",
+      "webhookId": "a116299e-0741-4efe-b567-34ce446c2b79"
+    },
+    {
+      "parameters": {
+        "url": "https://api.cal.com/v2/slots",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "eventTypeSlug",
+              "value": "health-consultancy"
+            },
+            {
+              "name": "username",
+              "value": "k-bharath-parmar-q58acx"
+            },
+            {
+              "name": "start",
+              "value": "2026-09-15"
+            },
+            {
+              "name": "end",
+              "value": "2026-09-16"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "cal-api-version",
+              "value": "2024-09-04"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        320,
+        0
+      ],
+      "id": "f786b1f6-52e2-4964-892b-80b3651069ca",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        640,
+        0
+      ],
+      "id": "98258966-5716-4905-b598-05075f4c7557",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "   {\n     \"patient_name\": \"John Doe\",\n     \"patient_phone\": \"9999999999\",\n     \"patient_email\": \"john@example.com\",\n     \"reason\": \"fever and headache\",\n     \"department\": \"General Medicine\",\n     \"preferred_date\": \"2026-09-15\"\n   }",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        368,
+        -192
+      ],
+      "id": "2f2da640-e92f-479b-abd7-9362d998ecca",
+      "name": "Edit Fields",
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "a6790831-901a-4e65-a6ce-cfb41d1edee3",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "56a8e90cd21acac866d966093af801dcabefefeb892a3ea84bffbe2eb697eb7b"
+  },
+  "nodeGroups": [],
+  "id": "d09v4p35rFpy0CYD",
+  "tags": []
+}
