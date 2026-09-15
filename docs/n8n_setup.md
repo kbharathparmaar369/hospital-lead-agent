@@ -5,7 +5,7 @@ This project runs n8n locally via npm (no Docker/hosting required for developmen
 ## Install
 npm install n8n -g
 
-## Run
+## Run (you can skip this)
 Set environment variables (optional, for basic auth):
 
 export N8N_BASIC_AUTH_ACTIVE=true
