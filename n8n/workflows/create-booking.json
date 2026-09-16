@@ -11,8 +11,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        0,
-        0
+        96,
+        112
       ],
       "id": "5bc094b2-63db-4f5a-b0f2-334f2b2ea530",
       "name": "Webhook",
@@ -31,7 +31,7 @@
             },
             {
               "name": "Authorization",
-              "value": "Bearer YOUR_API_KEY"
+              "value": "Bearer cal_live_3320e269157b31ebd918a85802376972"
             },
             {
               "name": "Content-Type",
@@ -47,8 +47,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        224,
-        -128
+        256,
+        112
       ],
       "id": "abcf4188-e7cf-497e-89bd-5de9b4f0b3fd",
       "name": "HTTP Request"
@@ -62,11 +62,11 @@
           "parameters": [
             {
               "name": "apikey",
-              "value": "SUPABASE_API_KEY"
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5dGxqaXNqbnBxZ21mdnhlbGRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk0NTkyMjksImV4cCI6MjEwNTAzNTIyOX0.QwEX4bzibCHk-Ndsw0ZKdj9iCLOaJaTrJoKdsoeGJoQ"
             },
             {
               "name": "Authorization",
-              "value": "Bearer SUPABASE_SERVICE_KEY"
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5dGxqaXNqbnBxZ21mdnhlbGRsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4OTQ1OTIyOSwiZXhwIjoyMTA1MDM1MjI5fQ.HHZuM5tfSvgrCqM_QYazp_OyRetChZKsFNxqnU6taeE"
             },
             {
               "name": "Content-Type",
@@ -87,7 +87,7 @@
       "typeVersion": 4.5,
       "position": [
         416,
-        160
+        112
       ],
       "id": "20d51758-6b43-4d09-9b54-215652513e21",
       "name": "HTTP Request1"
@@ -109,11 +109,35 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        624,
-        -64
+        768,
+        112
       ],
       "id": "bfa4e6aa-bd2b-49b0-bf09-67082644df7e",
       "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "fromEmail": "2024beaai036@mite.ac.in",
+        "toEmail": "={{ $('Webhook').item.json.body.patient_email }}",
+        "subject": "Appointment Confirmed - Health Consultancy",
+        "html": "=   Hi {{ $('Webhook').item.json.body.patient_name }},\n\n   Your appointment has been confirmed.\n\n   Department: {{ $('Webhook').item.json.body.department }}\n   Date/Time: {{ $('Webhook').item.json.body.start_time }}\n\n   If you need to reschedule or cancel, please contact us directly.\n\n   Thank you,\n   Hospital Scheduling Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        592,
+        112
+      ],
+      "id": "4fdb55d9-c4e8-4969-a92e-2152dde28d41",
+      "name": "Send an Email",
+      "webhookId": "00c96665-7423-4224-9615-ece5749191b9",
+      "credentials": {
+        "smtp": {
+          "id": "XFx46sieOQ9Nv4l8",
+          "name": "SMTP account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -144,6 +168,17 @@
       "main": [
         [
           {
+            "node": "Send an Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send an Email": {
+      "main": [
+        [
+          {
             "node": "Respond to Webhook",
             "type": "main",
             "index": 0
@@ -157,8 +192,9 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "96303eea-08ce-4b94-a0cf-ea02075da920",
+  "versionId": "b8487625-f65f-4fbd-8eb5-ccdd37495bc4",
   "meta": {
+    "templateCredsSetupCompleted": true,
     "instanceId": "56a8e90cd21acac866d966093af801dcabefefeb892a3ea84bffbe2eb697eb7b"
   },
   "nodeGroups": [],
