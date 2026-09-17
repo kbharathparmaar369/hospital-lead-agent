@@ -31,7 +31,7 @@
             },
             {
               "name": "Authorization",
-              "value": "Bearer cal_live_3320e269157b31ebd918a85802376972"
+              "value": "Bearer <CAL.COM_API_KEY>"
             },
             {
               "name": "Content-Type",
@@ -62,11 +62,11 @@
           "parameters": [
             {
               "name": "apikey",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5dGxqaXNqbnBxZ21mdnhlbGRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk0NTkyMjksImV4cCI6MjEwNTAzNTIyOX0.QwEX4bzibCHk-Ndsw0ZKdj9iCLOaJaTrJoKdsoeGJoQ"
+              "value": "<SUPABASE_SERVICE_ROLE_KEY>"
             },
             {
               "name": "Authorization",
-              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5dGxqaXNqbnBxZ21mdnhlbGRsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4OTQ1OTIyOSwiZXhwIjoyMTA1MDM1MjI5fQ.HHZuM5tfSvgrCqM_QYazp_OyRetChZKsFNxqnU6taeE"
+              "value": "Bearer <SUPABASE_SERVICE_ROLE_KEY>"
             },
             {
               "name": "Content-Type",
@@ -117,7 +117,7 @@
     },
     {
       "parameters": {
-        "fromEmail": "2024beaai036@mite.ac.in",
+        "fromEmail": "<TESTING_EMAIL>",
         "toEmail": "={{ $('Webhook').item.json.body.patient_email }}",
         "subject": "Appointment Confirmed - Health Consultancy",
         "html": "=   Hi {{ $('Webhook').item.json.body.patient_name }},\n\n   Your appointment has been confirmed.\n\n   Department: {{ $('Webhook').item.json.body.department }}\n   Date/Time: {{ $('Webhook').item.json.body.start_time }}\n\n   If you need to reschedule or cancel, please contact us directly.\n\n   Thank you,\n   Hospital Scheduling Team",
