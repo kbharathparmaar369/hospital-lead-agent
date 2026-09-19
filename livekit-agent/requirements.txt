@@ -1,2 +1,3 @@
 livekit-agents
 python-dotenv
+requests

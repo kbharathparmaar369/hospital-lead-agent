@@ -34,11 +34,11 @@
             },
             {
               "name": "start",
-              "value": "2026-09-15"
+              "value": "={{ $json.body.preferred_date }}"
             },
             {
               "name": "end",
-              "value": "2026-09-16"
+              "value": "={{ $json.body.preferred_date }}"
             }
           ]
         },
@@ -122,7 +122,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "a6790831-901a-4e65-a6ce-cfb41d1edee3",
+  "versionId": "ae66920b-16fe-4b77-9114-5e69aae2175f",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "56a8e90cd21acac866d966093af801dcabefefeb892a3ea84bffbe2eb697eb7b"
