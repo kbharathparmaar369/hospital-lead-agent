@@ -31,3 +31,7 @@ Thumbs.db
 # Build artifacts
 dist/
 build/
+
+# Cloned embed starter
+agent-starter-embed/
+livekit-agent/agent-starter-embed/

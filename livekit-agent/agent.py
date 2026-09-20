@@ -1,4 +1,5 @@
-from datetime import datetime
+from datetime import datetime, timedelta
+import json
 import logging
 import os
 import requests
@@ -42,14 +43,14 @@ Then, naturally collect the following from the patient through conversation:
 - Preferred date
 
 Once you have a preferred date, use the check_availability tool to see real 
-open slots. Read 2-3 options back to the patient in a natural spoken format 
-(e.g., "3:30 AM" instead of the raw timestamp).
+open slots. The tool returns available slots with "ist_time" (already converted 
+to Indian Standard Time, IST) and "start_time".
 
-IMPORTANT: When the patient picks a slot, you MUST use the EXACT "start" 
-value returned by check_availability for that slot as the start_time 
-parameter in create_booking. Do NOT generate, reformat, guess, or 
-paraphrase this value yourself - copy it exactly as it appeared in the 
-check_availability tool's result.
+Always read 3-5 options from "ist_time" to the patient (for example: "We have openings 
+at 9:30 AM, 10:00 AM, 11:30 AM, or 2:00 PM"). Never say UTC times.
+
+IMPORTANT: When the patient confirms a slot, use the EXACT "start_time" 
+associated with that chosen "ist_time" as the start_time parameter in create_booking.
 
 Once you have all required information and the patient confirms a slot, 
 call create_booking. Confirm the booking clearly at the end.
@@ -74,7 +75,36 @@ things at a time.
             )
 
             response.raise_for_status()
-            return str(response.json())
+            raw_data = response.json()
+            slots = raw_data.get("data", {}).get(preferred_date, [])
+            
+            if not slots:
+                return f"No open appointment slots found for {preferred_date}."
+
+            formatted_slots = []
+            for slot in slots:
+                raw_start = slot.get("start")
+                if not raw_start:
+                    continue
+                try:
+                    dt_utc = datetime.fromisoformat(raw_start.replace("Z", "+00:00"))
+                    dt_ist = dt_utc + timedelta(hours=5, minutes=30)
+                    ist_label = dt_ist.strftime("%I:%M %p").lstrip("0")
+                    formatted_slots.append({
+                        "ist_time": ist_label,
+                        "start_time": raw_start
+                    })
+                except Exception:
+                    formatted_slots.append({
+                        "ist_time": raw_start,
+                        "start_time": raw_start
+                    })
+
+            return json.dumps({
+                "date": preferred_date,
+                "timezone": "IST (Indian Standard Time)",
+                "available_slots": formatted_slots
+            })
         except Exception as e:
             logger.error(f"Check availability failed: {e}")
             return "I couldn't check availability right now. Please try again later."
