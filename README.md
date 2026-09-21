@@ -11,7 +11,7 @@
 
 Built as a complete proof-of-concept for automating routine hospital front-desk scheduling using a real-time voice AI pipeline (LiveKit) orchestrated through n8n, live calendar scheduling via Cal.com, lead tracking in Supabase, and email dispatch via Gmail SMTP.
 
-[Features](#-features) • [How It Works](#-how-it-works) • [Architecture](#-architecture) • [Full Launch Procedure](#-complete-step-by-step-launch-procedure) • [Tech Stack](#-tech-stack)
+[Features](#-features) • [How It Works](#-how-it-works) • [Architecture](#-architecture) • [Full Launch Procedure](#-complete-step-by-step-launch-procedure) • [Tech Stack](#-tech-stack) • [Skills Demonstrated](#-skills-demonstrated)
 
 ---
 
@@ -248,6 +248,14 @@ curl -X POST http://localhost:5678/webhook/create-booking \
     "start_time": "2026-09-22T04:30:00.000Z"
   }'
 ```
+
+## 💡 Skills Demonstrated
+- **Voice AI pipeline design**: STT / LLM / TTS orchestration via LiveKit Agents
+- **Workflow automation & API integration**: n8n workflows connecting REST endpoints
+- **Prompt engineering**: Structured conversational intake, entity extraction & tool-calling
+- **Debugging distributed systems**: API versioning (Cal.com v2), timezone handling (UTC to IST), async error handling
+- **Database design**: Supabase / PostgreSQL schema with row-level security
+- **Documentation & honest scoping**: Known limitations, failure boundaries, and production tradeoffs
 
 ---
 
