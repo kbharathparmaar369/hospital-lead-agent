@@ -26,7 +26,7 @@ This repository includes:
 
 ---
 
-## ✨ Features
+## ✨ Featuress
 
 ### 🎤 Real Voice Conversation
 - Natural spoken conversation via **LiveKit Agents** (STT → LLM → TTS)
